@@ -22,9 +22,11 @@ const App: FC = () => {
   const [answerData, setAnswerData] = useState<QueryResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
+  const BACKEND_URL = 'https://turium-server-new.onrender.com';
+
   const fetchItems = async (): Promise<void> => {
     try {
-      const res = await fetch('http://127.0.0.1:8000/items');
+      const res = await fetch(`${BACKEND_URL}/items`);
       const data: KnowledgeItem[] = await res.json();
       setItems(data);
     } catch (err) {
@@ -44,7 +46,7 @@ const App: FC = () => {
     }
     setLoading(true);
     try {
-      const res = await fetch('http://127.0.0.1:8000/ingest', {
+      const res = await fetch(`${BACKEND_URL}/ingest`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type, title, content })
@@ -65,7 +67,7 @@ const App: FC = () => {
     if (!question) return;
     setLoading(true);
     try {
-      const res = await fetch('http://127.0.0.1:8000/query', {
+      const res = await fetch(`${BACKEND_URL}/query`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question })
