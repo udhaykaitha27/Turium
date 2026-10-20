@@ -105,7 +105,7 @@ def query_rag(data: QueryRequest):
 
     try:
         completion = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
+            model="openai/gpt-oss-20b",
             messages=[
                 {"role": "system", "content": "You are a helpful RAG assistant."},
                 {"role": "user", "content": prompt}
